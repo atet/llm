@@ -4,7 +4,7 @@
 
 # Introduction to Large Language Models
 
-This introduction covers what is absolutely necessary to get you up and running to host [_large language models_](https://en.wikipedia.org/wiki/Wikipedia:Large_language_models) like OpenAI GPT, Google T5, and other models on your own computer.
+This introduction covers what is absolutely necessary to get you up and running to host _large language models_ like OpenAI GPT, Google T5, and other models on your own computer.
 
 --------------------------------------------------------------------------------------------------
 
@@ -21,7 +21,7 @@ This introduction covers what is absolutely necessary to get you up and running 
 
 * [Other Resources](#other-resources)
 * [Troubleshooting](#troubleshooting)
-* [Sources](#sources)
+* [Citations](#citations)
 
 --------------------------------------------------------------------------------------------------
 
@@ -39,20 +39,14 @@ The following tutorials will require:
 
 Model | Size Variant | Required System RAM | Required VRAM | Example Desktop GPU
 --- | --- | --- | --- | ---
-EleutherAI GPT-Neo | 125 Million Parameter (125M) | 4 GB | 2 GB | Nvidia GeForce GTX 1650
-EleutherAI GPT-Neo | 1.3 Billion Parameter (1.3B) | 12 GB | 6 GB | Nvidia GeForce GTX 1660
-EleutherAI GPT-Neo | 2.7 Billion Parameter (2.7B) | 16 GB | 8 GB | Nvidia GeForce RTX 3050
+EleutherAI GPT-Neo | 125 Million - 2.7 Billion Parameter (125M, 1.3B, 2.7B) | 16 GB | 8 GB | Nvidia GeForce RTX 3050
 EleutherAI GPT-J | 6 Billion Parameter (6B) | 32 GB | 16 GB | Nvidia GeForce RTX 3090
-Meta AI (Facebook) Fairseq Dense | 125 Million - 1.3 Billion Parameter (125M, 355M, 1.3B) | 8 GB | 4 GB | Nvidia GeForce GTX 1650
-Meta AI (Facebook) Fairseq Dense | 2.7 Billion Parameter (2.7B) | 16 GB | 8 GB | Nvidia GeForce RTX 3050
+Google FLAN-T5 | Large - Extra Extra Large (Large, XL, XXL) | 48 GB | 24 GB | Nvidia GeForce RTX 3090
+Meta AI (Facebook) Fairseq Dense | 125 Million - 2.7 Billion Parameter (125M, 355M, 1.3B, 2.7B) | 16 GB | 8 GB | Nvidia GeForce RTX 3050
 Meta AI (Facebook) Fairseq Dense | 6.7 Billion Parameter (2.7B) | 32 GB | 16 GB | Nvidia GeForce RTX 3090
-Google FLAN-T5 | Large | 12 GB | 6 GB | Nvidia GeForce GTX 1660
-Google FLAN-T5 | Extra Large (XL) | 32 GB | 16 GB | Nvidia GeForce RTX 3090
-Google FLAN-T5 | Extra Extra Large (XXL) | 48 GB | 24 GB | Nvidia GeForce RTX 3090
-OpenAI GPT-2 | Small, Medium, Large | 8 GB | 4 GB | Nvidia GeForce GTX 1650
-OpenAI GPT-2 | Extra Large (XL) | 12 GB | 6 GB | Nvidia GeForce GTX 1660
-OpenAI GPT-3[†](#sources) | 175 Billion Parameter (175B) | 700+ GB | 350 GB | ×11 Nvidia Tesla V100
-OpenAI ChatGPT (a.k.a. GPT-3.5)[‡](#sources) | 20 Billion Parameter (20B) | ??? GB | ??? GB | ×5 Nvidia Tesla V100
+OpenAI GPT-2 | Small, Medium, Large, Extra Large (XL) | 12 GB | 6 GB | Nvidia GeForce GTX 1660
+
+NOTE: If you do not have a sufficient GPU but have at least 8 GB of system RAM, you could still try out small GPT-2 models: [Instructions for GPT-2 with system RAM](https://github.com/atet/ggj2022).
 
 [Back to Top](#table-of-contents)
 
@@ -60,9 +54,9 @@ OpenAI ChatGPT (a.k.a. GPT-3.5)[‡](#sources) | 20 Billion Parameter (20B) | ??
 
 ## 1. Examples
 
-The following are ways you can use large language models:
+The following leverage these models to help with anything from removing writer's block in creative work to summarizing dense text manuscripts to get work done more efficiently:
 
-### Creative Completion of Text
+### 1.A. Creative Completion of Text
 
 * _From GPT-2 (Small):_
 
@@ -72,7 +66,7 @@ input  = "GPT-2 don't be so creepy, you're making me"
 output = "GPT-2 don't be so creepy, you're making me cry!"
 ```
 
-### Explanation and Rationale
+### 1.B. Explanation and Rationale
 
 * _From FLAN-T5 (XL):_
 
@@ -82,7 +76,7 @@ input  = "Give the rationale before answering. Could a single human eat an entir
 output = "An elephant can weigh up to 20,000 pounds. A single human can eat about 2,000 pounds of food in a year. So the final answer is no."
 ```
 
-### Text Summarization
+### 1.C. Text Summarization
 
 * _From FLAN-T5 (Large):_
 
@@ -92,7 +86,7 @@ input  = "Summarize the following for a teenager: HQ USSOCOM is seeking informat
 output = "Read the RFI."
 ```
 
-### Chat Bot
+### 1.D. Chat Bot
 
 * _From FLAN-T5 (XXL):_
 
@@ -112,6 +106,22 @@ output = "What do you think about death?"
 
 ## 2. Installation
 
+The following instructions are broken out into three sections: Installing the necessary common dependencies, leveraging a straightforward browser-based software that integrates multiple models, and running some of more recent models through command line interface (CLI).
+
+Training and/or fine-tuning models are beyond the scope of this tutorial.
+
+### 2.A. Common Dependencies for Utilizing Nvidia GPUs for Deep Learning Inference
+
+TODO
+
+### 2.B. KoboldAI: Web Browser-based Software with Multiple Integrated LLMs
+
+TODO
+
+### 2.C. Google FLAN-T5 Models in Python
+
+TODO
+
 [Back to Top](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------
@@ -124,9 +134,28 @@ output = "What do you think about death?"
 
 ## Other Resources
 
+* Full table of model hardware requirements:
+
+Model | Size Variant | Required System RAM | Required VRAM | Example Desktop GPU
+--- | --- | --- | --- | ---
+EleutherAI GPT-Neo | 125 Million Parameter (125M) | 4 GB | 2 GB | Nvidia GeForce GTX 1650
+EleutherAI GPT-Neo | 1.3 Billion Parameter (1.3B) | 12 GB | 6 GB | Nvidia GeForce GTX 1660
+EleutherAI GPT-Neo | 2.7 Billion Parameter (2.7B) | 16 GB | 8 GB | Nvidia GeForce RTX 3050
+EleutherAI GPT-J | 6 Billion Parameter (6B) | 32 GB | 16 GB | Nvidia GeForce RTX 3090
+Google FLAN-T5 | Large | 12 GB | 6 GB | Nvidia GeForce GTX 1660
+Google FLAN-T5 | Extra Large (XL) | 32 GB | 16 GB | Nvidia GeForce RTX 3090
+Google FLAN-T5 | Extra Extra Large (XXL) | 48 GB | 24 GB | Nvidia GeForce RTX 3090
+Meta AI (Facebook) Fairseq Dense | 125 Million - 1.3 Billion Parameter (125M, 355M, 1.3B) | 8 GB | 4 GB | Nvidia GeForce GTX 1650
+Meta AI (Facebook) Fairseq Dense | 2.7 Billion Parameter (2.7B) | 16 GB | 8 GB | Nvidia GeForce RTX 3050
+Meta AI (Facebook) Fairseq Dense | 6.7 Billion Parameter (2.7B) | 32 GB | 16 GB | Nvidia GeForce RTX 3090
+OpenAI GPT-2 | Small, Medium, Large | 8 GB | 4 GB | Nvidia GeForce GTX 1650
+OpenAI GPT-2 | Extra Large (XL) | 12 GB | 6 GB | Nvidia GeForce GTX 1660
+OpenAI GPT-3[†](#citations) | 175 Billion Parameter (175B) | 700 GB | 350 GB | ×11 Nvidia Tesla V100 (32GB VRAM)
+OpenAI ChatGPT (a.k.a. GPT-3.5)[‡](#citations) | 20 Billion Parameter (20B) | 320 GB | 160 GB | ×5 Nvidia Tesla V100 (32GB VRAM)
+
 Description | Link
 --- | ---
-null | null
+What are large language models (LLMs)? | [Wikipedia](https://en.wikipedia.org/wiki/Wikipedia:Large_language_models)
 
 [Back to Top](#table-of-contents)
 
@@ -136,16 +165,21 @@ null | null
 
 Issue | Solution
 --- | ---
-null | null
+I want to access GPT-3 or ChatGPT/GPT-3.5. | You can create an account with OpenAI to access those models online; this tutorial is focused on running the models locally on your computer.
+Can I use an AMD or Intel GPU? | No, not for this tutorial.
+I don't have enough GPU VRAM. | If you have at least 8 GB of system RAM, you could try out [GPT-2 models in system RAM](https://github.com/atet/ggj2022).
+I cannot access `nvidia-smi` within my docker container. | You must install `nvidia-docker2` in addition to docker.
+Some LLM responses are very unsettling. | Yes, they are.
 
 [Back to Top](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------
 
-## Sources
+## Citations
 
-1. [GPT-3 175B inference requirements](https://bdtechtalks.com/2020/09/21/gpt-3-economy-business-model/#:~:text=According%20to%20the%20OpenAI's%20whitepaper,32%20GB%20of%20memory%20each.)
-2. [Estimated ChatGPT inference requirements](https://twitter.com/tomgoldsteincs/status/1600196981955100694)
+† [GPT-3 175B inference requirements](https://bdtechtalks.com/2020/09/21/gpt-3-economy-business-model/#:~:text=According%20to%20the%20OpenAI's%20whitepaper,32%20GB%20of%20memory%20each.)
+
+‡ [Estimated ChatGPT (a.k.a. GPT-3.5) inference requirements](https://twitter.com/tomgoldsteincs/status/1600196981955100694)
 
 [Back to Top](#table-of-contents)
 
