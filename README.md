@@ -4,7 +4,7 @@
 
 # Introduction to Large Language Models
 
-This introduction covers what is absolutely necessary to get you up and running to host large language models like OpenAI GPT, Google T5, and other models on your own computer.
+This introduction covers what is absolutely necessary to get you up and running to host [_large language models_](https://en.wikipedia.org/wiki/Wikipedia:Large_language_models) like OpenAI GPT, Google T5, and other models on your own computer.
 
 --------------------------------------------------------------------------------------------------
 
@@ -14,7 +14,7 @@ This introduction covers what is absolutely necessary to get you up and running 
 
 * [0. Requirements](#0-requirements)
 * [1. Examples](#1-examples)
-* [2. Installation](#3-installation)
+* [2. Installation](#2-installation)
 * [3. Next Steps](#3-next-steps)
 
 ### Supplemental
@@ -26,6 +26,22 @@ This introduction covers what is absolutely necessary to get you up and running 
 --------------------------------------------------------------------------------------------------
 
 ## 0. Requirements
+
+The general rules of thumb as of 2023Q1 so that you spend less time troubleshooting and more time using these models:
+* Have more RAM and VRAM than you think you need
+* Load entire language model on the GPU VRAM
+* Use an Nvidia GPU
+
+The following tutorials will require:
+
+* **Software**: This tutorial was developed on Microsoft Windows 10 with Windows Subsystem for Linux
+* **Hardware**: The size of the large language model you can run is dependent on the amount of GPU VRAM and system RAM you have:
+
+Model | Required System RAM |Required VRAM | Example GPU
+--- | --- | --- | ---
+OpenAI GPT-2 | 16 GB | 8 GB | Nvidia GeForce RTX 3050
+EleutherAI GPT-J | 24 GB | 12 GB | Nvidia GeForce RTX 3060
+Google FLAN-T5-XXL | 48 GB | 24 GB | Nvidia GeForce RTX 3090
 
 [Back to Top](#table-of-contents)
 
