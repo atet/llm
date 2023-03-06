@@ -34,19 +34,16 @@ The general rules of thumb as of 2023Q1 so that you spend less time troubleshoot
 
 The following tutorials will require:
 
-* **Software**: This tutorial was developed on Microsoft Windows 10 with Windows Subsystem for Linux
+* **Software**: This tutorial was developed on Microsoft Windows 10 with Windows Subsystem for Linux 2 (WSL2)
 * **Hardware**: The size of the large language model you can run is dependent on the amount of GPU VRAM **and** system RAM you have:
 
-Model | Size Variant | Required System RAM | Required VRAM | Example Desktop GPU
---- | --- | --- | --- | ---
-EleutherAI GPT-Neo | 125 Million - 2.7 Billion Parameter (125M, 1.3B, 2.7B) | 16 GB | 8 GB | Nvidia GeForce RTX 3050
-EleutherAI GPT-J | 6 Billion Parameter (6B) | 32 GB | 16 GB | Nvidia GeForce RTX 3090
-Google FLAN-T5 | Large - Extra Extra Large (Large, XL, XXL) | 48 GB | 24 GB | Nvidia GeForce RTX 3090
-Meta AI (Facebook) Fairseq Dense | 125 Million - 2.7 Billion Parameter (125M, 355M, 1.3B, 2.7B) | 16 GB | 8 GB | Nvidia GeForce RTX 3050
-Meta AI (Facebook) Fairseq Dense | 6.7 Billion Parameter (2.7B) | 32 GB | 16 GB | Nvidia GeForce RTX 3090
-OpenAI GPT-2 | Small, Medium, Large, Extra Large (XL) | 12 GB | 6 GB | Nvidia GeForce GTX 1660
+Minimum Required GPU VRAM / System RAM (GB) | Models & Variants | Example Desktop GPU
+--- | --- | ---
+6 / 12 | • **EleutherAI GPT-Neo** (125 Million → 1.3 Billion Parameter)</br>• **Google FLAN-T5** (Medium → Large)</br>• **Meta AI (Facebook) Fairseq Dense** (125 Million → 1.3 Billion Parameter)</br>• **OpenAI GPT-2** (Small → Extra Large) | Nvidia GeForce GTX 1660
+8 / 16 | • **EleutherAI GPT-Neo** (2.7 Billion Parameter)</br>• **Meta AI (Facebook) Fairseq Dense** (2.7 Billion Parameter) | Nvidia GeForce RTX 3050
+24 / 48 | • **EleutherAI GPT-J** (6 Billion Parameter)</br>• **Google FLAN-T5** (Extra Large → Extra Extra Large)</br>• **Meta AI (Facebook) Fairseq Dense** (6.7 Billion Parameter) | Nvidia GeForce RTX 3090
 
-NOTE: If you do not have a sufficient GPU but have at least 8 GB of system RAM, you could still try out small GPT-2 models: [Instructions for GPT-2 with system RAM](https://github.com/atet/ggj2022).
+NOTE: If you do not have a sufficient GPU but have at least 8 GB of system RAM, you could still try out the smaller GPT-2 models: [Instructions for GPT-2 with system RAM](https://github.com/atet/ggj2022).
 
 [Back to Top](#table-of-contents)
 
@@ -54,7 +51,7 @@ NOTE: If you do not have a sufficient GPU but have at least 8 GB of system RAM, 
 
 ## 1. Examples
 
-The following leverage these models to help with anything from removing writer's block in creative work to summarizing dense text manuscripts to get work done more efficiently:
+The following are actual, real-life responses when leveraging these models for anything from removing writer's block in creative work to summarizing dense text manuscripts to get work done more efficiently:
 
 ### 1.A. Creative Completion of Text
 
@@ -88,7 +85,7 @@ output = "Read the RFI."
 
 ### 1.D. Chat Bot
 
-* _From FLAN-T5 (XXL):_
+* _From GPT-J (6B):_
 
 ```
 input  = "Tell me a joke about turtles."
@@ -106,13 +103,44 @@ output = "What do you think about death?"
 
 ## 2. Installation
 
-The following instructions are broken out into three sections: Installing the necessary common dependencies, leveraging a straightforward browser-based software that integrates multiple models, and running some of more recent models through command line interface (CLI).
+The following instructions are broken out into three sections: Installing the necessary common dependencies, leveraging browser-based software that integrates multiple models, and running the most recent models through command line interface (CLI).
 
-Training and/or fine-tuning models are beyond the scope of this tutorial.
+Training, fine-tuning, and prompt engineering are beyond the scope of this tutorial.
 
 ### 2.A. Common Dependencies for Utilizing Nvidia GPUs for Deep Learning Inference
 
-TODO
+i. Install Nvidia GPU drivers in Windows 10
+
+In your Windows 10 with Windows Subsystem for Linux 2 (WSL2) environment, install the most recent Nvidia drivers for your GPU in Windows (not in WSL2): https://www.nvidia.com/download/index.aspx
+
+> NOTE: "_Once a Windows NVIDIA GPU driver is installed on the system, CUDA becomes available within WSL 2...therefore users must not install any NVIDIA GPU Linux driver within WSL 2._" -[Nvidia CUDA on WSL2 User Guide](https://docs.nvidia.com/cuda/wsl-user-guide/index.html#cuda-support-for-wsl-2)
+
+After installation of the GPU drivers, the `nvidia-smi` command should now work within your WSL2 terminal:
+
+```console
+$ nvidia-smi
+<DETAILS ABOUT YOUR GPU>
+```
+
+ii. Install Nvidia CUDA Toolkit in WSL2
+
+> NOTE: For compatibility with Python deep learning libraries (as of 2023Q1), install CUDA 11.7 even though it is not the latest.
+
+Execute the following commands to install the only the CUDA Toolkit within WSL2:
+
+```console
+
+```
+
+iii. Test GPU utilization within WSL2 with Docker
+
+To keep things tidy, we'll install a couple other components so that the GPU can be quickly tested via Docker containers.
+
+The test will be a simulation that can be run on your CPU (much slower) and on your GPU (much faster) from. First we will run a simulation 
+
+```console
+
+```
 
 ### 2.B. KoboldAI: Web Browser-based Software with Multiple Integrated LLMs
 
@@ -134,7 +162,7 @@ TODO
 
 ## Other Resources
 
-* Full table of model hardware requirements:
+* Expanded table of model hardware requirements:
 
 Model | Size Variant | Required System RAM | Required VRAM | Example Desktop GPU
 --- | --- | --- | --- | ---
@@ -145,17 +173,19 @@ EleutherAI GPT-J | 6 Billion Parameter (6B) | 32 GB | 16 GB | Nvidia GeForce RTX
 Google FLAN-T5 | Large | 12 GB | 6 GB | Nvidia GeForce GTX 1660
 Google FLAN-T5 | Extra Large (XL) | 32 GB | 16 GB | Nvidia GeForce RTX 3090
 Google FLAN-T5 | Extra Extra Large (XXL) | 48 GB | 24 GB | Nvidia GeForce RTX 3090
-Meta AI (Facebook) Fairseq Dense | 125 Million - 1.3 Billion Parameter (125M, 355M, 1.3B) | 8 GB | 4 GB | Nvidia GeForce GTX 1650
+Meta AI (Facebook) Fairseq Dense | 125 Million → 1.3 Billion Parameter (125M, 355M, 1.3B) | 8 GB | 4 GB | Nvidia GeForce GTX 1650
 Meta AI (Facebook) Fairseq Dense | 2.7 Billion Parameter (2.7B) | 16 GB | 8 GB | Nvidia GeForce RTX 3050
-Meta AI (Facebook) Fairseq Dense | 6.7 Billion Parameter (2.7B) | 32 GB | 16 GB | Nvidia GeForce RTX 3090
-OpenAI GPT-2 | Small, Medium, Large | 8 GB | 4 GB | Nvidia GeForce GTX 1650
+Meta AI (Facebook) Fairseq Dense | 6.7 Billion Parameter (6.7B) | 32 GB | 16 GB | Nvidia GeForce RTX 3090
+OpenAI GPT-2 | Small → Large | 8 GB | 4 GB | Nvidia GeForce GTX 1650
 OpenAI GPT-2 | Extra Large (XL) | 12 GB | 6 GB | Nvidia GeForce GTX 1660
 OpenAI GPT-3[†](#citations) | 175 Billion Parameter (175B) | 700 GB | 350 GB | ×11 Nvidia Tesla V100 (32GB VRAM)
 OpenAI ChatGPT (a.k.a. GPT-3.5)[‡](#citations) | 20 Billion Parameter (20B) | 320 GB | 160 GB | ×5 Nvidia Tesla V100 (32GB VRAM)
 
 Description | Link
 --- | ---
-What are large language models (LLMs)? | [Wikipedia](https://en.wikipedia.org/wiki/Wikipedia:Large_language_models)
+What is Windows Subsystem for Linux (WSL)? | https://github.com/atet/wsl
+What are large language models (LLMs)? | https://en.wikipedia.org/wiki/Wikipedia:Large_language_models
+Nvidia CUDA on WSL2 User Guide | https://docs.nvidia.com/cuda/wsl-user-guide
 
 [Back to Top](#table-of-contents)
 
@@ -167,7 +197,7 @@ Issue | Solution
 --- | ---
 I want to access GPT-3 or ChatGPT/GPT-3.5. | You can create an account with OpenAI to access those models online; this tutorial is focused on running the models locally on your computer.
 Can I use an AMD or Intel GPU? | No, not for this tutorial.
-I don't have enough GPU VRAM. | If you have at least 8 GB of system RAM, you could try out [GPT-2 models in system RAM](https://github.com/atet/ggj2022).
+I don't have enough GPU VRAM. | If you have at least 8 GB of system RAM, you could try out the smaller [GPT-2 models in system RAM](https://github.com/atet/ggj2022).
 I cannot access `nvidia-smi` within my docker container. | You must install `nvidia-docker2` in addition to docker.
 Some LLM responses are very unsettling. | Yes, they are.
 
