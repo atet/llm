@@ -14,8 +14,9 @@ This introduction covers what is absolutely necessary to get you up and running 
 
 * [0. Requirements](#0-requirements)
 * [1. Examples](#1-examples)
-* [2. Installation](#2-installation)
-* [3. Next Steps](#3-next-steps)
+* [2. Installation (CPU-only)](#2-installation-cpu-only)
+* [3. Installation (GPU Acceleration)](#3-installation-gpu-acceleration)
+* [4. Next Steps](#4-next-steps)
 
 ### Supplemental
 
@@ -27,14 +28,14 @@ This introduction covers what is absolutely necessary to get you up and running 
 
 ## 0. Requirements
 
-The general rules of thumb as of 2023Q1 so that you spend less time troubleshooting and more time using these models:
+The general rules of thumb (as of 2024Q2) so that you spend less time troubleshooting and more time ***using these models***:
 * Have more RAM and VRAM than you think you need
 * Load entire language model on the GPU VRAM
 * Use an Nvidia GPU
 
 The following tutorials will require:
 
-* **Software**: This tutorial was developed on Microsoft Windows 10 with Windows Subsystem for Linux 2 (WSL2)
+* **Software**: This tutorial was developed on Microsoft Windows 10 with Windows Subsystem for Linux 2 (WSL2) and Docker
 * **Hardware**: The size of the large language model you can run is dependent on the amount of GPU VRAM **and** system RAM you have:
 
 Minimum Required GPU VRAM / System RAM (GB) | Models & Variants | Example Desktop GPU
@@ -101,11 +102,23 @@ output = "What do you think about death?"
 
 --------------------------------------------------------------------------------------------------
 
-## 2. Installation
+## 2. Installation (CPU-only)
+
+The following instructions will quickly install browser-based software that can leverage multiple models appropriate to your available RAM.
+
+NOTE: Training, fine-tuning, and prompt engineering are beyond the scope of this tutorial.
+
+[Back to Top](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------
+
+## 3. Installation (GPU Acceleration)
+
+**This area is being updated**
 
 The following instructions are broken out into three sections: Installing the necessary common dependencies, leveraging browser-based software that integrates multiple models, and running the most recent models through command line interface (CLI).
 
-Training, fine-tuning, and prompt engineering are beyond the scope of this tutorial.
+NOTE: Training, fine-tuning, and prompt engineering are beyond the scope of this tutorial.
 
 ### 2.A. Common Dependencies for Utilizing Nvidia GPUs for Deep Learning Inference
 
@@ -129,7 +142,7 @@ ii. Install Nvidia CUDA Toolkit in WSL2
 Execute the following commands to install the only the CUDA Toolkit within WSL2:
 
 ```console
-
+TBD
 ```
 
 iii. Test GPU utilization within WSL2 with Docker
@@ -139,7 +152,7 @@ To keep things tidy, we'll install a couple other components so that the GPU can
 The test will be a simulation that can be run on your CPU (much slower) and on your GPU (much faster) from. First we will run a simulation 
 
 ```console
-
+TBD
 ```
 
 ### 2.B. KoboldAI: Web Browser-based Software with Multiple Integrated LLMs
@@ -154,7 +167,11 @@ TODO
 
 --------------------------------------------------------------------------------------------------
 
-## 3. Next Steps
+## 4. Next Steps
+
+Keep up to date with the leaderboard of models on Hugging Face at https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard
+
+NOTE: For Open WebUI with Ollama, available models for Ollama are listed at https://ollama.com/library
 
 [Back to Top](#table-of-contents)
 
