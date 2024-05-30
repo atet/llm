@@ -36,7 +36,8 @@ The general rules of thumb (as of 2024Q2) so that you spend less time troublesho
 The following tutorials will require:
 
 * **Software**: This tutorial was developed on Microsoft Windows 10 with Windows Subsystem for Linux 2 (WSL2) and Docker
-* **Hardware**: The size of the large language model you can run is dependent on the amount of GPU VRAM **and** system RAM you have:
+* **Hardware (for CPU-only)**: The size of the large language model you can run is dependent on the amount of system RAM you have, **16 GB RAM is the minimum** for the CPU-only tutorial
+* **Hardware (for GPU Acceleration)**: The size of the large language model you can run is dependent on the amount of GPU VRAM **and** system RAM you have:
 
 Minimum Required GPU VRAM / System RAM (GB) | Models & Variants | Example Desktop GPU
 --- | --- | ---
@@ -52,7 +53,9 @@ NOTE: If you do not have a sufficient GPU but have at least 8 GB of system RAM, 
 
 ## 1. Examples
 
-The following are actual, real-life responses when leveraging these models for anything from removing writer's block in creative work to summarizing dense text manuscripts to get work done more efficiently:
+The following are actual, real-life responses when leveraging these models for anything from removing writer's block in creative work to summarizing dense text manuscripts to get work done more efficiently.
+
+NOTE: Training, fine-tuning, and prompt engineering are beyond the scope of this tutorial.
 
 ### 1.A. Creative Completion of Text
 
@@ -106,7 +109,60 @@ output = "What do you think about death?"
 
 The following instructions will quickly install browser-based software that can leverage multiple models appropriate to your available RAM.
 
-NOTE: Training, fine-tuning, and prompt engineering are beyond the scope of this tutorial.
+1. Start [Ollama](https://ollama.com/blog/ollama-is-now-available-as-an-official-docker-image) service from a Docker container; this is for CPU-only with at least 16 GB of RAM (this will take a few minutes):
+
+```console
+$ docker run -d -p 11434:11434 -v ollama:/root/.ollama --name ollama --restart always ollama/ollama
+```
+
+2. Confirm Ollama webserver is running by visiting `localhost:11434` and seeing that "`Ollama is running`":
+   - NOTE: Do not download any models for Ollama through CLI, they will not register with Open WebUI; we will download models through Open WebUI instead
+
+[![.img/fig1_ollama.png](.img/fig1_ollama.png)](#nolink)
+
+3. Start [Open WebUI](https://docs.openwebui.com/getting-started/#installation-with-default-configuration) from a Docker container (this will take a few minutes):
+
+```console
+$ docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main
+```
+
+4. Access Open WebUI website by visiting `localhost:3000`:
+
+[![.img/fig2_openwebui.png](.img/fig2_openwebui.png)](#nolink)
+
+5. Click on "Sign up" at the bottom and register with any username/email (can be fake)/password, and click "Create Account":
+
+[![.img/fig3_openwebui.png](.img/fig3_openwebui.png)](#nolink)
+
+6. Click on bottom right icon and select "Settings":
+
+[![.img/fig4_openwebui.png](.img/fig4_openwebui.png)](#nolink)
+
+7. Click on "Models" and in the text box for "Pull a model from Ollama.com," type in "`dolphin-mistral`", and click on the download icon to the right:
+
+[![.img/fig5_openwebui.png](.img/fig5_openwebui.png)](#nolink)
+
+8. Wait for the model to download, have its integrity checked, and properly registered into your Open WebUI environment:
+
+[![.img/fig6_openwebui.png](.img/fig6_openwebui.png)](#nolink)
+
+9. Exit from Settings and by default you will be in a "New Chat," click on the top "Select a model" and choose "`dolphin-mistral:latest`," and input a prompt at the bottom like, "`Write a haiku about artificial intelligence.`":
+
+[![.img/fig7_openwebui.png](.img/fig7_openwebui.png)](#nolink)
+
+10. Since CPU/RAM processing is much slower than GPU/VRAM processing, it may take a couple minutes to output a response:
+
+[![.img/fig8_openwebui.png](.img/fig8_openwebui.png)](#nolink)
+
+> Silent thoughts weave,
+>
+> Artificial Intelligence blooms;
+>
+> Awakening life.
+>
+> – `dolphin-mistral`
+
+Awesome! Now you've got a powerful large language model **installed locally on your computer**. If you disconnected from the internet, the Open WebUI and dolphin-mistral model would still work!
 
 [Back to Top](#table-of-contents)
 
@@ -114,11 +170,9 @@ NOTE: Training, fine-tuning, and prompt engineering are beyond the scope of this
 
 ## 3. Installation (GPU Acceleration)
 
-**This area is being updated**
+**This area is currently being updated**
 
 The following instructions are broken out into three sections: Installing the necessary common dependencies, leveraging browser-based software that integrates multiple models, and running the most recent models through command line interface (CLI).
-
-NOTE: Training, fine-tuning, and prompt engineering are beyond the scope of this tutorial.
 
 ### 2.A. Common Dependencies for Utilizing Nvidia GPUs for Deep Learning Inference
 
@@ -142,7 +196,7 @@ ii. Install Nvidia CUDA Toolkit in WSL2
 Execute the following commands to install the only the CUDA Toolkit within WSL2:
 
 ```console
-TBD
+TODO
 ```
 
 iii. Test GPU utilization within WSL2 with Docker
@@ -152,16 +206,20 @@ To keep things tidy, we'll install a couple other components so that the GPU can
 The test will be a simulation that can be run on your CPU (much slower) and on your GPU (much faster) from. First we will run a simulation 
 
 ```console
-TBD
+TODO
 ```
 
 ### 2.B. KoboldAI: Web Browser-based Software with Multiple Integrated LLMs
 
+```console
 TODO
+```
 
 ### 2.C. Google FLAN-T5 Models in Python
 
+```console
 TODO
+```
 
 [Back to Top](#table-of-contents)
 
