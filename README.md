@@ -57,7 +57,7 @@ The following are actual, real-life responses when leveraging these models for a
 
 NOTE: Training, fine-tuning, and prompt engineering are beyond the scope of this tutorial.
 
-### 1.A. Creative Completion of Text
+### 1.1. Creative Completion of Text
 
 * _From GPT-2 (Small):_
 
@@ -67,7 +67,7 @@ input  = "GPT-2 don't be so creepy, you're making me"
 output = "GPT-2 don't be so creepy, you're making me cry!"
 ```
 
-### 1.B. Explanation and Rationale
+### 1.2. Explanation and Rationale
 
 * _From FLAN-T5 (XL):_
 
@@ -77,7 +77,7 @@ input  = "Give the rationale before answering. Could a single human eat an entir
 output = "An elephant can weigh up to 20,000 pounds. A single human can eat about 2,000 pounds of food in a year. So the final answer is no."
 ```
 
-### 1.C. Text Summarization
+### 1.3. Text Summarization
 
 * _From FLAN-T5 (Large):_
 
@@ -87,7 +87,7 @@ input  = "Summarize the following for a teenager: HQ USSOCOM is seeking informat
 output = "Read the RFI."
 ```
 
-### 1.D. Chat Bot
+### 1.4. Chat Bot
 
 * _From GPT-J (6B):_
 
@@ -107,50 +107,51 @@ output = "What do you think about death?"
 
 ## 2. Installation (CPU-only)
 
-The following instructions will quickly install browser-based software that can leverage multiple models appropriate to your available RAM.
+The following instructions will quickly install browser-based software that can leverage multiple models appropriate to your available RAM (16 GB minimum for this tutorial).
 
-1. Start [Ollama](https://ollama.com/blog/ollama-is-now-available-as-an-official-docker-image) service from a Docker container; this is for CPU-only with at least 16 GB of RAM (this will take a few minutes):
+2.1. Start [Ollama](https://ollama.com/blog/ollama-is-now-available-as-an-official-docker-image) service from a Docker container:
+   - NOTE: The command below will not leverage your GPU if you have one and is supported
 
 ```console
 $ docker run -d -p 11434:11434 -v ollama:/root/.ollama --name ollama --restart always ollama/ollama
 ```
 
-2. Confirm Ollama webserver is running by visiting `localhost:11434` and seeing that "`Ollama is running`":
+2.2. Confirm Ollama webserver is running by visiting `localhost:11434` and seeing that "`Ollama is running`":
    - NOTE: Do not download any models for Ollama through CLI, they will not register with Open WebUI; we will download models through Open WebUI instead
 
 [![.img/fig1_ollama.png](.img/fig1_ollama.png)](#nolink)
 
-3. Start [Open WebUI](https://docs.openwebui.com/getting-started/#installation-with-default-configuration) from a Docker container (this will take a few minutes):
+2.3. Start [Open WebUI](https://docs.openwebui.com/getting-started/#installation-with-default-configuration) from a Docker container (this will take a few minutes):
 
 ```console
 $ docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main
 ```
 
-4. Access Open WebUI website by visiting `localhost:3000`:
+2.4. Access Open WebUI website by visiting `localhost:3000`:
 
 [![.img/fig2_openwebui.png](.img/fig2_openwebui.png)](#nolink)
 
-5. Click on "Sign up" at the bottom and register with any username/email (can be fake)/password, and click "Create Account":
+2.5. Click on "Sign up" at the bottom and register with any username/email (can be fake)/password, and click "Create Account":
 
 [![.img/fig3_openwebui.png](.img/fig3_openwebui.png)](#nolink)
 
-6. Click on bottom right icon and select "Settings":
+2.6. Click on bottom right icon and select "Settings":
 
 [![.img/fig4_openwebui.png](.img/fig4_openwebui.png)](#nolink)
 
-7. Click on "Models" and in the text box for "Pull a model from Ollama.com," type in "`dolphin-mistral`", and click on the download icon to the right:
+2.7. Click on "Models" and in the text box for "Pull a model from Ollama.com," type in "`dolphin-mistral`", and click on the download icon to the right:
 
 [![.img/fig5_openwebui.png](.img/fig5_openwebui.png)](#nolink)
 
-8. Wait for the model to download, have its integrity checked, and properly registered into your Open WebUI environment:
+2.8. Wait for the model to download, have its integrity checked, and properly registered into your Open WebUI environment:
 
 [![.img/fig6_openwebui.png](.img/fig6_openwebui.png)](#nolink)
 
-9. Exit from Settings and by default you will be in a "New Chat," click on the top "Select a model" and choose "`dolphin-mistral:latest`," and input a prompt at the bottom like, "`Write a haiku about artificial intelligence.`":
+2.9. Exit from Settings and by default you will be in a "New Chat," click on the top "Select a model" and choose "`dolphin-mistral:latest`," and input a prompt at the bottom like, "`Write a haiku about artificial intelligence.`":
 
 [![.img/fig7_openwebui.png](.img/fig7_openwebui.png)](#nolink)
 
-10. Since CPU/RAM processing is much slower than GPU/VRAM processing, it may take a couple minutes to output a response:
+2.10. Since CPU/RAM processing is much slower than GPU/VRAM processing, it may take a couple minutes to output a response:
 
 [![.img/fig8_openwebui.png](.img/fig8_openwebui.png)](#nolink)
 
@@ -174,9 +175,9 @@ Awesome! Now you've got a powerful large language model **installed locally on y
 
 The following instructions are broken out into three sections: Installing the necessary common dependencies, leveraging browser-based software that integrates multiple models, and running the most recent models through command line interface (CLI).
 
-### 2.A. Common Dependencies for Utilizing Nvidia GPUs for Deep Learning Inference
+### 3.1. Common Dependencies for Utilizing Nvidia GPUs for Deep Learning Inference
 
-i. Install Nvidia GPU drivers in Windows 10
+3.1.1. Install Nvidia GPU drivers in Windows 10
 
 In your Windows 10 with Windows Subsystem for Linux 2 (WSL2) environment, install the most recent Nvidia drivers for your GPU in Windows (not in WSL2): https://www.nvidia.com/download/index.aspx
 
@@ -189,7 +190,7 @@ $ nvidia-smi
 <DETAILS ABOUT YOUR GPU>
 ```
 
-ii. Install Nvidia CUDA Toolkit in WSL2
+3.1.2. Install Nvidia CUDA Toolkit in WSL2
 
 > NOTE: For compatibility with Python deep learning libraries (as of 2023Q1), install CUDA 11.7 even though it is not the latest.
 
@@ -199,7 +200,7 @@ Execute the following commands to install the only the CUDA Toolkit within WSL2:
 TODO
 ```
 
-iii. Test GPU utilization within WSL2 with Docker
+3.1.3. Test GPU utilization within WSL2 with Docker
 
 To keep things tidy, we'll install a couple other components so that the GPU can be quickly tested via Docker containers.
 
@@ -209,13 +210,13 @@ The test will be a simulation that can be run on your CPU (much slower) and on y
 TODO
 ```
 
-### 2.B. KoboldAI: Web Browser-based Software with Multiple Integrated LLMs
+### 3.2. KoboldAI: Web Browser-based Software with Multiple Integrated LLMs
 
 ```console
 TODO
 ```
 
-### 2.C. Google FLAN-T5 Models in Python
+### 3.3. Google FLAN-T5 Models in Python
 
 ```console
 TODO
@@ -227,15 +228,47 @@ TODO
 
 ## 4. Next Steps
 
+### 4.1. Up-to-Date Models
+
 Keep up to date with the leaderboard of models on Hugging Face at https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard
 
 NOTE: For Open WebUI with Ollama, available models for Ollama are listed at https://ollama.com/library
+
+### 4.2. Stopping and Uninstalling Open WebUI and Ollama
+
+Good news is that Open WebUI and Ollama were stood up as containers, so nothing was technically "*installed*," you can check the status of the containers, stop, and (re)start them:
+
+```console
+$ docker ps -a
+CONTAINER ID   IMAGE                                COMMAND               CREATED          STATUS                    PORTS                                           NAMES
+f517b5c25628   ghcr.io/open-webui/open-webui:main   "bash start.sh"       47 minutes ago   Up 47 minutes (healthy)   0.0.0.0:3000->8080/tcp, :::3000->8080/tcp       open-webui
+d5f7cd566cce   ollama/ollama                        "/bin/ollama serve"   53 minutes ago   Up 53 minutes             0.0.0.0:11434->11434/tcp, :::11434->11434/tcp   ollama
+
+$ docker stop open-webui
+open-webui
+$ docker stop ollama
+ollama
+
+$ docker start open-webui
+open-webui
+$ docker start ollama
+ollama
+```
 
 [Back to Top](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------
 
 ## Other Resources
+
+Description | Link
+--- | ---
+What is Windows Subsystem for Linux (WSL)? | https://github.com/atet/wsl
+What are large language models (LLMs)? | https://en.wikipedia.org/wiki/Wikipedia:Large_language_models
+Nvidia CUDA on WSL2 User Guide | https://docs.nvidia.com/cuda/wsl-user-guide
+Open WebUI | https://docs.openwebui.com
+Ollama | https://ollama.com
+Hugging Face LLM Leaderboard | https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard
 
 * Expanded table of model hardware requirements:
 
@@ -256,12 +289,6 @@ OpenAI GPT-2 | Extra Large (XL) | 12 GB | 6 GB | Nvidia GeForce GTX 1660
 OpenAI GPT-3[†](#citations) | 175 Billion Parameter (175B) | 700 GB | 350 GB | ×11 Nvidia Tesla V100 (32GB VRAM)
 OpenAI ChatGPT (a.k.a. GPT-3.5)[‡](#citations) | 20 Billion Parameter (20B) | 320 GB | 160 GB | ×5 Nvidia Tesla V100 (32GB VRAM)
 
-Description | Link
---- | ---
-What is Windows Subsystem for Linux (WSL)? | https://github.com/atet/wsl
-What are large language models (LLMs)? | https://en.wikipedia.org/wiki/Wikipedia:Large_language_models
-Nvidia CUDA on WSL2 User Guide | https://docs.nvidia.com/cuda/wsl-user-guide
-
 [Back to Top](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------
@@ -273,6 +300,7 @@ Issue | Solution
 I want to access GPT-3 or ChatGPT/GPT-3.5. | You can create an account with OpenAI to access those models online; this tutorial is focused on running the models locally on your computer.
 Can I use an AMD or Intel GPU? | No, not for this tutorial.
 I don't have enough GPU VRAM. | If you have at least 8 GB of system RAM, you could try out the smaller [GPT-2 models in system RAM](https://github.com/atet/ggj2022).
+Model did not seem to install from Ollama in Open WebUI after download completed | Exit out of Settings, go back into Settings/Models and redownload the same model; should start at 100%, reverify, and register correctly
 I cannot access `nvidia-smi` within my docker container. | You must install `nvidia-docker2` in addition to docker.
 Some LLM responses are very unsettling. | Yes, they are.
 
